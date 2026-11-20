@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /
+# PRE-LAUNCH: change to Allow: / once real products, images, legal compliance and site URL are verified.
