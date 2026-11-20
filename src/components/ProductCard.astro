@@ -1,11 +1,13 @@
 ---
-import {productEconomics,promotionAllowed,currency} from '../utils.js';
+import {productEconomics,approvedPromotion,currency,availableVariants} from '../utils.js';
 const {p}=Astro.props;
-const soldOut = !p.active || p.stockMl < p.sizeMl;
-const promo = promotionAllowed(p,p.promoPercent||0)?(p.promoPercent||0):0;
-const price = productEconomics(p,promo).price;
+const variants=availableVariants(p).filter(v=>p.stockMl>=v.sizeMl);
+const defaultVariant=variants[0];
+const soldOut = !p.active || !defaultVariant;
+const promo = approvedPromotion(p);
+const price = defaultVariant ? defaultVariant.price*(1-promo/100) : p.price;
 ---
-<article class={`product-card tone-${p.color}`} data-product-card data-name={`${p.brand} ${p.name}`.toLowerCase()} data-category={p.category} data-mood={p.mood}>
+<article class={`product-card tone-${p.color}`} data-product-card data-name={`${p.brand} ${p.name} ${p.family} ${p.notes.join(" ")}`.toLowerCase()} data-category={p.category} data-mood={p.mood}>
   <a class="product-visual" href={`/perfumes/${p.slug}/`} aria-label={`View ${p.name}`}>
     <div class="visual-decoration decor-one"></div><div class="visual-decoration decor-two"></div>
     {p.image ? <img src={p.image} loading="lazy" alt={`${p.brand} ${p.name} original retail bottle`}/> : <div class="bottle-art" aria-hidden="true"><span class="bottle-cap"></span><span class="bottle-body"><b>{p.brand}</b><strong>{p.name}</strong><i>eau de parfum</i></span></div>}
@@ -14,5 +16,5 @@ const price = productEconomics(p,promo).price;
     {promo>0 && !soldOut && <span class="image-tag sale-tag">−{promo}%</span>}
     {!p.image && <span class="image-disclaimer">Visual placeholder · add bottle image</span>}
   </a>
-  <div class="product-details"><div class="product-topline">{p.brand}<span>{p.sizeMl} ML DECANT</span></div><a href={`/perfumes/${p.slug}/`} class="product-name">{p.name}</a><p class="product-family">{p.family} · {p.mood}</p><div class="product-bottom"><div class="price-group"><span class="price">{currency(price)}</span>{promo>0 && <del>{currency(p.price)}</del>}</div><button class="add-to-bag" data-add-product={p.slug} disabled={soldOut} aria-label={`Add ${p.name} to bag`}>{soldOut?'Sold out':'Add +'}</button></div></div>
+  <div class="product-details"><div class="product-topline">{p.brand}<span>{variants.map(v=>`${v.sizeMl} ml`).join(" · ") || "Sold out"}</span></div><a href={`/perfumes/${p.slug}/`} class="product-name">{p.name}</a><p class="product-family">{p.family} · {p.mood}</p><div class="product-bottom"><div class="price-group"><span class="price">{currency(price)}</span>{promo>0 && <del>{currency(p.price)}</del>}</div><button class="add-to-bag" data-add-product={p.slug} data-add-size={defaultVariant?.sizeMl || p.sizeMl} disabled={soldOut} aria-label={`Add ${p.name} to bag`}>{soldOut?'Sold out':'Add +'}</button></div></div>
 </article>

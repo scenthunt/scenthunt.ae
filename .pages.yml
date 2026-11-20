@@ -24,7 +24,10 @@ content:
           - {name: bottleMl, label: Original bottle (ml), type: number}
           - {name: bottleCost, label: Original bottle cost (AED), type: number}
           - {name: sizeMl, label: Decant size (ml), type: number}
-          - {name: price, label: Selling price (AED), type: number}
+          - {name: price, label: Current/default decant price (AED), type: number}
+          - {name: price3Ml, label: 3 ml price (AED; 0 = not offered), type: number, default: 0}
+          - {name: price5Ml, label: 5 ml price (AED; 0 = not offered), type: number, default: 0}
+          - {name: price10Ml, label: 10 ml price (AED; 0 = not offered), type: number, default: 0}
           - {name: stockMl, label: Remaining liquid (ml), type: number}
           - {name: active, label: Visible, type: boolean}
           - {name: promoPercent, label: Promotion discount (percent), type: number}
