@@ -8,14 +8,14 @@ const soldOut = !p.active || !defaultVariant;
 const promo = approvedPromotion(p);
 const price = defaultVariant ? defaultVariant.price*(1-promo/100) : p.price;
 ---
-<article class={`product-card tone-${p.color}`} data-product-card data-name={`${p.brand} ${p.name} ${p.family} ${p.notes.join(" ")}`.toLowerCase()} data-category={p.category} data-mood={p.mood}>
+<article class={`product-card tone-${p.color}`} data-product-card data-name={`${p.brand} ${p.name} ${p.family} ${(p.notes||[]).join(" ")}`.toLowerCase()} data-category={p.category} data-mood={p.mood}>
   <a class="product-visual" href={`/perfumes/${p.slug}/`} aria-label={`Explore ${p.name}`}>
     <FragranceArt p={p} />
     {soldOut && <span class="image-tag sold-tag">Sold out</span>}
     {promo>0 && !soldOut && <span class="image-tag sale-tag">−{promo}%</span>}
   </a>
   <div class="product-details">
-    <div class="product-topline"><span>{p.brand}</span><span>{variants.map(v=>`${v.sizeMl} ml`).join(" · ") || "Sold out"}</span></div>
+    <div class="product-topline"><span class="product-maker">{p.brand}</span><span class="product-sizes-summary">{variants.map(v=>`${v.sizeMl} ml`).join(" · ") || "Sold out"}</span></div>
     <a href={`/perfumes/${p.slug}/`} class="product-name">{p.name}</a>
     <p class="product-family">{p.family} · {p.mood}</p>
     {defaultVariant ? (
