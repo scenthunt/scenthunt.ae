@@ -1,0 +1,33 @@
+{
+  "slug": "alezz-oud-hersh-lahab",
+  "name": "Hersh Lahab",
+  "brand": "Alezz Oud",
+  "active": false,
+  "category": "middle-eastern",
+  "family": "Green Aromatic",
+  "mood": "Fresh days",
+  "description": "A spirited aromatic blend of basil, pepper and grapefruit against earthy vetiver and patchouli. An interesting discovery for anyone curious about fresher, greener fragrances with a spicy edge.",
+  "notes": [
+    "Basil",
+    "Vetiver",
+    "Black pepper",
+    "Grapefruit",
+    "Patchouli"
+  ],
+  "offer3Ml": false,
+  "price3Ml": 0,
+  "offer5Ml": false,
+  "price5Ml": 0,
+  "offer10Ml": false,
+  "price10Ml": 0,
+  "stockMl": 0,
+  "bottleMl": 100,
+  "bottleCost": 0,
+  "promoPercent": 0,
+  "color": "sage",
+  "image": "",
+  "artwork": "",
+  "ingredientBackground": "",
+  "bottleCutout": "",
+  "featured": false
+}
