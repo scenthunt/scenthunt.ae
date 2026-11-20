@@ -17,9 +17,9 @@
     "Musk",
     "Woody notes"
   ],
-  "offer3Ml": false,
+  "offer3Ml": true,
   "price3Ml": 10,
-  "offer5Ml": false,
+  "offer5Ml": true,
   "price5Ml": 15,
   "offer10Ml": false,
   "price10Ml": 20,
