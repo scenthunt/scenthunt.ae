@@ -1,0 +1,21 @@
+{
+  "brandName": "Modern Atelier",
+  "tagline": "A little fragrance. A lot to discover.",
+  "currency": "AED",
+  "minimumOrder": 120,
+  "deliveryFee": 15,
+  "freeDeliveryAt": 200,
+  "assumedCourierCost": 25,
+  "atomizerCost": 3,
+  "perItemSupplies": 0.7,
+  "orderPackaging": 2,
+  "handlingLossRate": 0.03,
+  "paymentFeePercent": 0.026,
+  "paymentFeeFixed": 1,
+  "paymentFeeVat": 0.05,
+  "minContributionMargin": 0.30,
+  "maximumPromotionPercent": 20,
+  "whatsappNumber": "",
+  "acceptOrders": false,
+  "description": "Discover carefully selected fragrance decants in the UAE. Explore notes, moods, and memorable scents before choosing your next full bottle."
+}

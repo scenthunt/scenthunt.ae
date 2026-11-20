@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import productData from '../../data/products.json';
 const products = productData.products;
-import {currency,productEconomics,promotionAllowed} from '../../utils.js';
+import {currency,productEconomics,approvedPromotion,availableVariants} from '../../utils.js';
 export async function getStaticPaths() {
   const { default: data } = await import('../../data/products.json');
 
@@ -15,16 +15,23 @@ export async function getStaticPaths() {
     }));
 }
 const {p}=Astro.props;
-const promo=promotionAllowed(p,p.promoPercent||0)?p.promoPercent||0:0;
-const price=productEconomics(p,promo).price;
-const inStock=p.stockMl>=p.sizeMl && p.active;
-const schema={ '@context':'https://schema.org','@type':'Product',name:`${p.brand} ${p.name} ${p.sizeMl}ml Decant`,description:p.description,brand:{'@type':'Brand',name:p.brand},sku:`${p.slug}-${p.sizeMl}`,offers:{'@type':'Offer',price:price.toFixed(2),priceCurrency:'AED',availability:inStock?'https://schema.org/InStock':'https://schema.org/OutOfStock',url:new URL(Astro.url.pathname,Astro.site).toString(),itemCondition:'https://schema.org/NewCondition'},additionalProperty:[{'@type':'PropertyValue',name:'Decant volume',value:`${p.sizeMl} ml`}]};
+const promo=approvedPromotion(p);
+const variants=availableVariants(p).map(v=>({...v,discounted:v.price*(1-promo/100),inStock:p.stockMl>=v.sizeMl}));
+const firstVariant=variants.find(v=>v.inStock) || variants[0];
+const price=firstVariant?.discounted??p.price;
+const inStock=variants.some(v=>v.inStock) && p.active;
+const schema={ '@context':'https://schema.org','@type':'Product',name:`${p.brand} ${p.name} Perfume Decants`,description:p.description,brand:{'@type':'Brand',name:p.brand},sku:p.slug,offers:{'@type':'Offer',price:price.toFixed(2),priceCurrency:'AED',availability:inStock?'https://schema.org/InStock':'https://schema.org/OutOfStock',url:new URL(Astro.url.pathname,Astro.site).toString(),itemCondition:'https://schema.org/NewCondition'},additionalProperty:[{'@type':'PropertyValue',name:'Decant volume',value:variants.map(v=>`${v.sizeMl} ml`).join(", ")}]};
 if(p.image) schema.image=new URL(p.image, Astro.site).toString();
 ---
-<Base title={`${p.brand} ${p.name} ${p.sizeMl}ml Decant UAE | Modern Atelier`} description={`Discover ${p.brand} ${p.name} as a ${p.sizeMl} ml fragrance decant in the UAE. ${p.description} Fragrance notes: ${p.notes.join(', ')}.`} robots="noindex,follow">
+<Base title={`${p.brand} ${p.name} Perfume Decants UAE | ScentHunt`} description={`Discover ${p.brand} ${p.name} fragrance decants in the UAE. ${p.description} Fragrance notes: ${p.notes.join(', ')}.`} robots="noindex,follow">
 <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g,'\\u003c')}/>
 <div class="breadcrumbs"><a href="/">Home</a> / <a href="/#collection">Fragrances</a> / <span>{p.name}</span></div>
 <section class="detail-layout"><div class={`detail-visual tone-${p.color}`}><div class="visual-decoration decor-one"></div><div class="visual-decoration decor-two"></div>{p.image?<img class="detail-photo" src={p.image} alt={`${p.brand} ${p.name} original retail bottle`}/>:<div class="bottle-art detail-bottle" aria-hidden="true"><span class="bottle-cap"></span><span class="bottle-body"><b>{p.brand}</b><strong>{p.name}</strong><i>eau de parfum</i></span></div>}<span class="note-cloud note-top">{p.notes[0]}</span><span class="note-cloud note-bottom">{p.notes[1]}</span>{!p.image && <span class="image-disclaimer">Illustrative placeholder · replace before launch</span>}</div>
-<div class="detail-info"><span class="eyebrow">A LITTLE BOTTLE OF DISCOVERY</span><p class="detail-brand">{p.brand}</p><h1>{p.name}</h1><div class="detail-chips"><span>{p.family}</span><span>{p.mood}</span><span>{p.sizeMl} ml</span></div><p class="detail-description">{p.description}</p><div class="notes-panel"><h2>The scent notes</h2><p>Meet the elements that make this fragrance memorable.</p><div class="notes-grid">{p.notes.map((n,i)=><div><span>0{i+1}</span><b>{n}</b></div>)}</div></div><div class="buy-bar"><div><span>YOUR {p.sizeMl} ML DISCOVERY</span><strong>{currency(price)}</strong>{promo>0&&<del>{currency(p.price)}</del>}</div><button class="button-dark" data-add-product={p.slug} disabled={!inStock}>{inStock?'Add to discovery bag +':'Currently unavailable'}</button></div><div class="product-clarification">✳ You're purchasing a {p.sizeMl} ml decant, not the full retail bottle. Original fragrance shown for reference; the filled sample is supplied in a separate glass atomizer.</div></div></section>
+<div class="detail-info"><span class="eyebrow">A LITTLE BOTTLE OF DISCOVERY</span><p class="detail-brand">{p.brand}</p><h1>{p.name}</h1><div class="detail-chips"><span>{p.family}</span><span>{p.mood}</span><span>{variants.map(v=>`${v.sizeMl} ml`).join(" / ")}</span></div><p class="detail-description">{p.description}</p><div class="notes-panel"><h2>The scent notes</h2><p>Meet the elements that make this fragrance memorable.</p><div class="notes-grid">{p.notes.map(n=><div><b>{n.trim()}</b></div>)}</div></div><div class="size-picker" data-variant-picker><span class="eyebrow">CHOOSE YOUR DISCOVERY SIZE</span><div class="size-options">{variants.map(v=><button type="button" class="size-option" data-variant-size={v.sizeMl} data-variant-price={v.discounted} disabled={!v.inStock} aria-pressed={v.sizeMl===firstVariant?.sizeMl}><strong>{v.sizeMl} ml</strong><small>{currency(v.discounted)}</small></button>)}</div></div><div class="buy-bar"><div><span>YOUR SELECTED DISCOVERY</span><strong id="selected-variant-price">{currency(price)}</strong></div><button class="button-dark" data-add-product={p.slug} data-add-size={firstVariant?.sizeMl || p.sizeMl} disabled={!inStock}>{inStock?'Add to discovery bag +':'Currently unavailable'}</button></div><div class="product-clarification">✳ You're purchasing a fragrance decant, not the full retail bottle. Original fragrance shown for reference; the filled sample is supplied in a separate glass atomizer.</div></div></section>
 <section class="more-scents"><div class="section-head"><div><span class="eyebrow">KEEP EXPLORING</span><h2>Something else to <em>fall for.</em></h2></div></div><div class="product-grid">{products.filter(x=>x.active&&x.slug!==p.slug).slice(0,4).map(x=><ProductCard p={x}/>)}</div></section>
 </Base>
+
+<script>
+const picker=document.querySelector('[data-variant-picker]');
+if(picker){const buttons=[...picker.querySelectorAll('[data-variant-size]')];const choose=b=>{buttons.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));const add=document.querySelector('.buy-bar [data-add-product]');if(add)add.dataset.addSize=b.dataset.variantSize;const price=document.getElementById('selected-variant-price');if(price)price.textContent=`AED ${Number(b.dataset.variantPrice).toFixed(0)}`;};buttons.forEach(b=>b.addEventListener('click',()=>choose(b)));const active=buttons.find(b=>b.getAttribute('aria-pressed')==='true'&&!b.disabled)||buttons.find(b=>!b.disabled);if(active)choose(active);}
+</script>
