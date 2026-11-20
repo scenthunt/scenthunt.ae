@@ -1,0 +1,32 @@
+{
+  "slug": "armani-stronger-with-you",
+  "name": "Stronger With You",
+  "brand": "Emporio Armani",
+  "category": "designer",
+  "family": "Warm Spicy",
+  "mood": "After dark",
+  "notes": [
+    "Cardamom",
+    "Chestnut",
+    "Vanilla",
+    "Amber"
+  ],
+  "description": "A cosy, confident warm-spicy scent. Confirm the exact concentration before publishing.",
+  "bottleMl": 100,
+  "bottleCost": 300,
+  "sizeMl": 3,
+  "price": 29,
+  "stockMl": 30,
+  "active": true,
+  "promoPercent": 0,
+  "color": "lilac",
+  "featured": false,
+  "offer3Ml": true,
+  "offer5Ml": false,
+  "offer10Ml": false,
+  "price3Ml": 29,
+  "price5Ml": 0,
+  "price10Ml": 0,
+  "artwork": "",
+  "ingredientBackground": ""
+}

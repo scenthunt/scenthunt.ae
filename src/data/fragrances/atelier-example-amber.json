@@ -1,0 +1,32 @@
+{
+  "slug": "atelier-example-amber",
+  "name": "Amber Study",
+  "brand": "Sample fragrance",
+  "category": "middle-eastern",
+  "family": "Warm Amber",
+  "mood": "Cosy nights",
+  "notes": [
+    "Amber",
+    "Vanilla",
+    "Resins",
+    "Woods"
+  ],
+  "description": "Sample listing. Replace with a real fragrance before launching.",
+  "bottleMl": 100,
+  "bottleCost": 100,
+  "sizeMl": 5,
+  "price": 18,
+  "stockMl": 35,
+  "active": true,
+  "promoPercent": 0,
+  "color": "rose",
+  "featured": false,
+  "offer3Ml": false,
+  "offer5Ml": true,
+  "offer10Ml": false,
+  "price3Ml": 0,
+  "price5Ml": 18,
+  "price10Ml": 0,
+  "artwork": "",
+  "ingredientBackground": ""
+}
