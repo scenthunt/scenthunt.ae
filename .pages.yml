@@ -1,0 +1,58 @@
+media:
+  input: public/images
+  output: /images
+content:
+  - name: products
+    label: Fragrance catalogue
+    type: file
+    path: src/data/products.json
+    format: json
+    fields:
+      - name: products
+        label: Fragrances
+        type: object
+        list: true
+        fields:
+          - {name: slug, label: URL slug, type: string}
+          - {name: name, label: Fragrance name, type: string}
+          - {name: brand, label: Brand, type: string}
+          - {name: category, label: Category, type: select, options: {values: [middle-eastern, designer, niche]}}
+          - {name: family, label: Fragrance family, type: string}
+          - {name: mood, label: Mood, type: select, options: {values: ['Everyday', 'Fresh days', 'After dark', 'Cosy nights']}}
+          - {name: notes, label: Notes, type: string, list: true}
+          - {name: description, label: Description, type: text}
+          - {name: bottleMl, label: Original bottle (ml), type: number}
+          - {name: bottleCost, label: Original bottle cost (AED), type: number}
+          - {name: sizeMl, label: Decant size (ml), type: number}
+          - {name: price, label: Selling price (AED), type: number}
+          - {name: stockMl, label: Remaining liquid (ml), type: number}
+          - {name: active, label: Visible, type: boolean}
+          - {name: promoPercent, label: Promotion discount (percent), type: number}
+          - {name: image, label: Original bottle or composite image, type: image}
+          - {name: color, label: Palette, type: select, options: {values: [peach, sage, lilac, blue, honey, terracotta, rose]}}
+          - {name: featured, label: Featured, type: boolean}
+  - name: settings
+    label: Store settings
+    type: file
+    path: src/data/settings.json
+    format: json
+    fields:
+      - {name: brandName, label: Brand name, type: string}
+      - {name: tagline, label: Tagline, type: string}
+      - {name: currency, label: Currency, type: string}
+      - {name: minimumOrder, label: Minimum order AED, type: number}
+      - {name: deliveryFee, label: Customer delivery charge AED, type: number}
+      - {name: freeDeliveryAt, label: Free delivery threshold AED, type: number}
+      - {name: assumedCourierCost, label: Expected actual courier AED, type: number}
+      - {name: atomizerCost, label: Atomizer cost AED, type: number}
+      - {name: perItemSupplies, label: Labels and supplies AED, type: number}
+      - {name: orderPackaging, label: Shared packaging AED, type: number}
+      - {name: handlingLossRate, label: Handling loss decimal, type: number}
+      - {name: paymentFeePercent, label: Payment percentage decimal, type: number}
+      - {name: paymentFeeFixed, label: Fixed payment fee AED, type: number}
+      - {name: paymentFeeVat, label: Fee VAT decimal, type: number}
+      - {name: minContributionMargin, label: Minimum margin decimal, type: number}
+      - {name: maximumPromotionPercent, label: Maximum discount percentage, type: number}
+      - {name: whatsappNumber, label: WhatsApp number international format, type: string}
+      - {name: acceptOrders, label: Enable WhatsApp order enquiries, type: boolean}
+      - {name: description, label: Search description, type: text}
