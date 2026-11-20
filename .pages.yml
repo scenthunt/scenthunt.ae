@@ -3,13 +3,13 @@ media:
   output: /images
 content:
   - name: fragrances
-    label: Fragrances
+    label: Fragrance catalogue (individual entries)
     type: collection
     path: src/data/fragrances
     format: json
     filename: "{primary}.json"
     view:
-      fields: [name, brand, category, stockMl, active]
+      fields: [name, brand, category, stockMl, active, featured]
       primary: name
       sort: name
       default:
@@ -19,25 +19,25 @@ content:
       - {name: slug, label: URL slug, type: string, required: true}
       - {name: name, label: Fragrance name, type: string, required: true}
       - {name: brand, label: Brand, type: string, required: true}
-      - {name: active, label: Visible on website, type: boolean, default: true}
-      - {name: category, label: Category, type: select, options: {values: [middle-eastern, designer, niche]}}
+      - {name: active, label: Published (enable after review), type: boolean, default: false}
+      - {name: category, label: Fragrance category, type: select, options: {values: [middle-eastern, designer, niche]}}
       - {name: family, label: Fragrance family, type: string}
       - {name: mood, label: Mood, type: select, options: {values: ['Everyday', 'Fresh days', 'After dark', 'Cosy nights']}}
-      - {name: description, label: Description, type: text}
+      - {name: description, label: Discovery description, type: text}
       - {name: notes, label: Notes, type: string, list: true}
-      - {name: offer3Ml, label: Offer 3 ml, type: boolean, default: false}
-      - {name: price3Ml, label: 3 ml price AED, type: number, default: 0}
-      - {name: offer5Ml, label: Offer 5 ml, type: boolean, default: true}
-      - {name: price5Ml, label: 5 ml price AED, type: number, default: 0}
-      - {name: offer10Ml, label: Offer 10 ml, type: boolean, default: false}
-      - {name: price10Ml, label: 10 ml price AED, type: number, default: 0}
-      - {name: stockMl, label: Remaining liquid ml, type: number}
+      - {name: offer3Ml, label: Sell 3 ml, type: boolean, default: false}
+      - {name: price3Ml, label: Price for 3 ml (AED), type: number, default: 0}
+      - {name: offer5Ml, label: Sell 5 ml, type: boolean, default: true}
+      - {name: price5Ml, label: Price for 5 ml (AED), type: number, default: 0}
+      - {name: offer10Ml, label: Sell 10 ml, type: boolean, default: false}
+      - {name: price10Ml, label: Price for 10 ml (AED), type: number, default: 0}
+      - {name: stockMl, label: Remaining stock in ml, type: number}
       - {name: bottleMl, label: Original bottle size ml, type: number}
       - {name: bottleCost, label: Original bottle cost AED, type: number}
       - {name: promoPercent, label: Promotion discount percent, type: number, default: 0}
       - {name: color, label: Colour palette, type: select, options: {values: [peach, sage, lilac, blue, honey, terracotta, rose]}}
-      - {name: image, label: Original bottle photo, type: image}
-      - {name: artwork, label: Finished composite artwork optional, type: image}
+      - {name: image, label: Original bottle photo (upload file), type: image}
+      - {name: artwork, label: Full bottle and ingredients artwork (optional), type: image}
       - {name: ingredientBackground, label: Ingredient background optional, type: image}
       - {name: bottleCutout, label: Transparent bottle image optional, type: image}
       - {name: featured, label: Featured, type: boolean, default: false}

@@ -9,7 +9,7 @@ export function availableVariants(p) {
     .filter(v => Number.isFinite(v.price) && v.price > 0);
 }
 export function productEconomics(p, percent = p.promoPercent || 0) {
-  const liquid = p.bottleCost / p.bottleMl * p.sizeMl / (1-settings.handlingLossRate);
+  const liquid = Number(p.bottleMl)>0 ? (Number(p.bottleCost)/Number(p.bottleMl))*Number(p.sizeMl)/(1-settings.handlingLossRate) : 0;
   const price = p.price*(1-percent/100);
   const supplies = settings.atomizerCost + settings.perItemSupplies;
   const contribution = price - liquid - supplies;
@@ -26,7 +26,7 @@ export function approvedPromotion(p) {
   const variants=availableVariants(p);
   const safe=variants.every(v=>{
     const sale=v.price*(1-pct/100);
-    const liquid=p.bottleCost/p.bottleMl*v.sizeMl/(1-settings.handlingLossRate);
+    const liquid=Number(p.bottleMl)>0 ? p.bottleCost/p.bottleMl*v.sizeMl/(1-settings.handlingLossRate) : Infinity;
     return sale>0 && (sale-liquid-settings.atomizerCost-settings.perItemSupplies)/sale>=settings.minContributionMargin;
   });
   return safe?pct:0;
