@@ -1,5 +1,5 @@
 ---
-import {productEconomics,approvedPromotion,currency,availableVariants} from '../utils.js';
+import {approvedPromotion,currency,availableVariants} from '../utils.js';
 import FragranceArt from './FragranceArt.astro';
 const {p}=Astro.props;
 const variants=availableVariants(p).filter(v=>p.stockMl>=v.sizeMl);
@@ -9,11 +9,25 @@ const promo = approvedPromotion(p);
 const price = defaultVariant ? defaultVariant.price*(1-promo/100) : p.price;
 ---
 <article class={`product-card tone-${p.color}`} data-product-card data-name={`${p.brand} ${p.name} ${p.family} ${p.notes.join(" ")}`.toLowerCase()} data-category={p.category} data-mood={p.mood}>
-  <a class="product-visual" href={`/perfumes/${p.slug}/`} aria-label={`View ${p.name}`}>
-    <div class="visual-decoration decor-one"></div><div class="visual-decoration decor-two"></div>
+  <a class="product-visual" href={`/perfumes/${p.slug}/`} aria-label={`Explore ${p.name}`}>
     <FragranceArt p={p} />
     {soldOut && <span class="image-tag sold-tag">Sold out</span>}
     {promo>0 && !soldOut && <span class="image-tag sale-tag">−{promo}%</span>}
   </a>
-  <div class="product-details"><div class="product-topline">{p.brand}<span>{variants.map(v=>`${v.sizeMl} ml`).join(" · ") || "Sold out"}</span></div><a href={`/perfumes/${p.slug}/`} class="product-name">{p.name}</a><p class="product-family">{p.family} · {p.mood}</p><div class="product-bottom"><div class="price-group"><span class="price">{currency(price)}</span>{promo>0 && defaultVariant && <del>{currency(defaultVariant.price)}</del>}</div><button class="add-to-bag" data-add-product={p.slug} data-add-size={defaultVariant?.sizeMl || p.sizeMl} disabled={soldOut} aria-label={`Add ${p.name} to bag`}>{soldOut?'Sold out':'Add +'}</button></div></div>
+  <div class="product-details">
+    <div class="product-topline"><span>{p.brand}</span><span>{variants.map(v=>`${v.sizeMl} ml`).join(" · ") || "Sold out"}</span></div>
+    <a href={`/perfumes/${p.slug}/`} class="product-name">{p.name}</a>
+    <p class="product-family">{p.family} · {p.mood}</p>
+    {defaultVariant ? (
+      <div class="card-purchase" data-card-variant-picker>
+        <div class="card-sizes" role="group" aria-label={`Select size for ${p.name}`}>
+          {variants.map(v=><button type="button" class="card-size" data-card-size={v.sizeMl} data-card-price={v.price*(1-promo/100)} aria-pressed={v.sizeMl===defaultVariant.sizeMl}>{v.sizeMl} ml</button>)}
+        </div>
+        <div class="card-purchase-footer">
+          <span class="card-price" data-card-displayed-price>{currency(price)}</span>
+          <button class="add-to-bag" data-add-product={p.slug} data-add-size={defaultVariant.sizeMl} aria-label={`Add ${p.name} to bag`}>Add to bag</button>
+        </div>
+      </div>
+    ) : (<div class="card-purchase-footer"><span class="card-price">Unavailable</span><a class="card-explore" href={`/perfumes/${p.slug}/`}>Details</a></div>)}
+  </div>
 </article>
