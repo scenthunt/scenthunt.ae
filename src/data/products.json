@@ -9,9 +9,16 @@
       "mood": "After dark",
       "notes": [
         "Saffron",
+        "ginger",
+        "mandarin",
+        "bergamot",
+        "Moroccan rose",
+        "Egyptian jasmine",
         "Amber",
-        "Rose",
-        "Vanilla"
+        " Vanilla",
+        "oakmos",
+        "white musk",
+        "sandalwood"
       ],
       "description": "A radiant, sweet amber profile with saffron and warm florals. A bold evening discovery.",
       "bottleMl": 120,
@@ -21,7 +28,7 @@
       "stockMl": 30,
       "active": true,
       "promoPercent": 0,
-      "image": "",
+      "image": "/images/instant-crush.jpg",
       "color": "peach",
       "featured": true
     },
@@ -46,7 +53,6 @@
       "stockMl": 30,
       "active": true,
       "promoPercent": 0,
-      "image": "",
       "color": "sage",
       "featured": true
     },
@@ -71,7 +77,6 @@
       "stockMl": 30,
       "active": true,
       "promoPercent": 0,
-      "image": "",
       "color": "lilac",
       "featured": false
     },
@@ -96,7 +101,6 @@
       "stockMl": 45,
       "active": true,
       "promoPercent": 0,
-      "image": "",
       "color": "blue",
       "featured": true
     },
@@ -121,7 +125,6 @@
       "stockMl": 40,
       "active": true,
       "promoPercent": 0,
-      "image": "",
       "color": "honey",
       "featured": true
     },
@@ -146,7 +149,6 @@
       "stockMl": 40,
       "active": true,
       "promoPercent": 0,
-      "image": "",
       "color": "terracotta",
       "featured": false
     },
@@ -171,7 +173,6 @@
       "stockMl": 35,
       "active": true,
       "promoPercent": 0,
-      "image": "",
       "color": "rose",
       "featured": false
     },
@@ -196,7 +197,6 @@
       "stockMl": 35,
       "active": true,
       "promoPercent": 0,
-      "image": "",
       "color": "sage",
       "featured": false
     }
