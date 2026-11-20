@@ -1,8 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
-import productData from '../data/products.json';
-const products = productData.products;
+import { products } from '../data/catalog.js';
 import settings from '../data/settings.json';
 import {currency} from '../utils.js';
 const published=products.filter(p=>p.active);

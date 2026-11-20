@@ -1,5 +1,4 @@
-import productData from '../data/products.json';
-const products = productData.products;
+import { products } from '../data/catalog.js';
 import settings from '../data/settings.json';
 import {approvedPromotion,productEconomics,orderEconomics,availableVariants} from '../utils.js';
 const $=s=>document.querySelector(s);

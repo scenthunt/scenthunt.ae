@@ -1,0 +1,32 @@
+{
+  "slug": "mancera-cedrat-boise",
+  "name": "Cedrat Boise",
+  "brand": "Mancera",
+  "category": "niche",
+  "family": "Citrus Woody",
+  "mood": "Everyday",
+  "notes": [
+    "Citrus",
+    "Blackcurrant",
+    "Cedar",
+    "Leather"
+  ],
+  "description": "Sparkling citrus and fruity woods with a textured, elegant drydown.",
+  "bottleMl": 120,
+  "bottleCost": 280,
+  "sizeMl": 3,
+  "price": 24,
+  "stockMl": 30,
+  "active": true,
+  "promoPercent": 0,
+  "color": "sage",
+  "featured": true,
+  "offer3Ml": true,
+  "offer5Ml": false,
+  "offer10Ml": false,
+  "price3Ml": 24,
+  "price5Ml": 0,
+  "price10Ml": 0,
+  "artwork": "",
+  "ingredientBackground": ""
+}

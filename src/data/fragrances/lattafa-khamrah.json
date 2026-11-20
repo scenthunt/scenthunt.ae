@@ -1,0 +1,32 @@
+{
+  "slug": "lattafa-khamrah",
+  "name": "Khamrah",
+  "brand": "Lattafa",
+  "category": "middle-eastern",
+  "family": "Sweet Gourmand",
+  "mood": "Cosy nights",
+  "notes": [
+    "Cinnamon",
+    "Praline",
+    "Vanilla",
+    "Tonka"
+  ],
+  "description": "A rich, dessert-like composition with spice and warmth.",
+  "bottleMl": 100,
+  "bottleCost": 120,
+  "sizeMl": 5,
+  "price": 21,
+  "stockMl": 40,
+  "active": true,
+  "promoPercent": 0,
+  "color": "honey",
+  "featured": true,
+  "offer3Ml": false,
+  "offer5Ml": true,
+  "offer10Ml": false,
+  "price3Ml": 0,
+  "price5Ml": 21,
+  "price10Ml": 0,
+  "artwork": "",
+  "ingredientBackground": ""
+}

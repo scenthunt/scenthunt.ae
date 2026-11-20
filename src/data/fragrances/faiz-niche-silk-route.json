@@ -1,0 +1,32 @@
+{
+  "slug": "faiz-niche-silk-route",
+  "name": "Silk Route Extrait",
+  "brand": "Faiz Niche",
+  "category": "middle-eastern",
+  "family": "Woody Aromatic",
+  "mood": "Everyday",
+  "notes": [
+    "Spices",
+    "Aromatic woods",
+    "Amber",
+    "Musk"
+  ],
+  "description": "A striking woody-aromatic direction. Verify manufacturer notes before launch.",
+  "bottleMl": 100,
+  "bottleCost": 160,
+  "sizeMl": 5,
+  "price": 28,
+  "stockMl": 40,
+  "active": true,
+  "promoPercent": 0,
+  "color": "terracotta",
+  "featured": false,
+  "offer3Ml": false,
+  "offer5Ml": true,
+  "offer10Ml": false,
+  "price3Ml": 0,
+  "price5Ml": 28,
+  "price10Ml": 0,
+  "artwork": "",
+  "ingredientBackground": ""
+}

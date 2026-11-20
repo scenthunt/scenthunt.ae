@@ -1,10 +1,12 @@
 import settings from './data/settings.json';
 export const currency = (n) => `AED ${Number(n).toFixed(0)}`;
 export function availableVariants(p) {
-  const values = [3,5,10].map(size => ({ sizeMl:size, price:Number(p[`price${size}Ml`]) }));
-  const listed=values.filter(v=>Number.isFinite(v.price)&&v.price>0);
-  if (!listed.some(v=>v.sizeMl===Number(p.sizeMl))) listed.push({sizeMl:Number(p.sizeMl),price:Number(p.price)});
-  return listed.filter(v=>Number.isFinite(v.sizeMl)&&Number.isFinite(v.price)&&v.price>0).sort((a,b)=>a.sizeMl-b.sizeMl);
+  return [3, 5, 10]
+    .filter(size => p[`offer${size}Ml`] === true ||
+      (p[`offer${size}Ml`] == null && Number(p.sizeMl) === size))
+    .map(size => ({ sizeMl: size, price: Number(p[`price${size}Ml`] ||
+      (Number(p.sizeMl) === size ? p.price : 0)) }))
+    .filter(v => Number.isFinite(v.price) && v.price > 0);
 }
 export function productEconomics(p, percent = p.promoPercent || 0) {
   const liquid = p.bottleCost / p.bottleMl * p.sizeMl / (1-settings.handlingLossRate);

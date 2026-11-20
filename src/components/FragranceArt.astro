@@ -1,0 +1,19 @@
+---
+const {p, detail=false}=Astro.props;
+const hasComposite=Boolean(p.artwork);
+const hasLayers=Boolean(p.ingredientBackground && p.bottleCutout);
+const hasBottle=Boolean(p.image);
+const label=`${p.brand} ${p.name}: original fragrance bottle`;
+---
+{hasComposite ? (
+  <img class="atelier-composite" src={p.artwork} alt={`${label}, with illustrative fragrance ingredients`} loading={detail?'eager':'lazy'} decoding="async" />
+) : hasLayers ? (
+  <div class="atelier-art-layers" role="img" aria-label={`${label}, with fragrance-inspired ingredient artwork`}>
+    <img class="atelier-ingredients" src={p.ingredientBackground} alt="" loading={detail?'eager':'lazy'} decoding="async" />
+    <img class="atelier-bottle-cutout" src={p.bottleCutout} alt="" loading={detail?'eager':'lazy'} decoding="async" />
+  </div>
+) : hasBottle ? (
+  <div class="atelier-photo-mat"><img class="atelier-original-bottle" src={p.image} alt={label} loading={detail?'eager':'lazy'} decoding="async" /></div>
+) : (
+  <div class="atelier-coming-soon" aria-label="Fragrance image coming soon"><span aria-hidden="true">✳</span><small>Photo being prepared</small></div>
+)}
