@@ -29,5 +29,6 @@
   "promoPercent": 0,
   "color": "honey",
   "image": "/images/amber-oud-gold.jpeg",
-  "featured": false
+  "featured": false,
+  "artwork": "/images/al-haramain-amber-oud-gold-edition-artwork.webp"
 }
